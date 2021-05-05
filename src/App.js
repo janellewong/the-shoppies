@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import 'semantic-ui-css/semantic.min.css'
+import { Container } from 'semantic-ui-react';
 
-function App() {
+import FetchOMDB from "./FetchOMDB";
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <Container>
+      <h1>The Shoppies</h1>
+      <h2>Instructions:</h2>
+      <p>Search the movies you want to nominate and click the nominate button to add it to your nominate list!</p>
+        <FetchOMDB></FetchOMDB>
+      </Container>
     </div>
-  );
+  )
 }
 
 export default App;
