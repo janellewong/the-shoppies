@@ -29,7 +29,7 @@ const NomList = ({movies, imdbID}) => {
 
     return ( 
         <div className="nom-list">
-            <h2>Nominated Movies</h2>
+            <h2>Nominated Movies:</h2>
             {nomList.map(nom => (
                 <div className="movies" key={nom.id} >
                     <h2>{ nom.Title }</h2>
@@ -42,6 +42,6 @@ const NomList = ({movies, imdbID}) => {
 
 export default NomList;
 
-   // run fn every time button is pressed
-    //Option 1. set nomList = movies; 2. setState to filtered list with only ids of the ones in the var list
-    //Option 2. nomList is empty; add only the new movie of that id to list 
+//    run fn every time button is pressed
+//     Option 1. set nomList = movies; 2. setState to filtered list with only ids of the ones in the var list
+//     Option 2. nomList is empty; add only the new movie of that id to list 

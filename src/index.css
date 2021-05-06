@@ -6,8 +6,61 @@
     color: #333;
   }
 
+  .App {
+    background-size: fixed;
+    /* background-image: url("https://i.ytimg.com/vi/KcCETRC8q9o/maxresdefault.jpg"); */
+    background-image: url("https://wallpaperaccess.com/full/288727.jpg");
+      
+  }
+
+  .App h1 {
+    font-size: 60px;
+    font-weight: bolder;
+    align-items: center;
+    color: white
+  
+  }
+
+  .app-description {
+    padding: 50px;
+  }
+
   .content {
     max-width: 600px;
     margin: 40px auto;
     padding: 20px;
   }
+  
+  .search-bar {
+    padding: 30px;
+  }
+
+  .search-results {
+    padding: 30px;
+    background-color:ivory;
+    border-radius: 25px;
+    min-height: 55vh;
+
+  }
+
+  .nominate-button {
+    padding:15px;
+  }
+
+  .footer {
+    padding: 20px;
+    color: white;
+    background-color:black;
+    position: relative;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .col-sm {
+    color: white;
+    font-size: 10px;
+  }
+
+
+
