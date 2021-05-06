@@ -6,23 +6,22 @@ const FetchOMDB = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [nomList, setnomList] = useState([]);
 
 
   const fetchData = async () => {
     setLoading(true)
-    const url = `http://www.omdbapi.com/?apikey=f2bfaa0c&s=${searchQuery}`;
+    const url = `http://www.omdbapi.com/?apikey=f2bfaa0c&type=movie&s=${searchQuery}`;
     const response = await fetch(url);
     const data = await response.json();
-    setLoading(false);
     setMovies(data.Search)
-    // const filteredMovies = movies.filter(movie => movie.Type === "movie")
-    // setMovies(filteredMovies)
+    setLoading(false)
   }
 
-  const handleClick = () => {
-    console.log("poop");
+  const createList = (movie) => {
+    setnomList([...nomList, movie])
+  };
 
-  }
 
   useEffect(() => {
     fetchData()
@@ -62,10 +61,10 @@ const FetchOMDB = () => {
                       <Item.Meta>Year released: {movie.Year}</Item.Meta>
                       <Item.Extra>Movie Type: {movie.Type}</Item.Extra>
                       <div className = "nominate-button">
-                        <button onClick={() => handleClick(movie.imdbID)} style={{
-                          backgroundColor: '#ecf0f1',
-                          borderRadius: '8px'
-                        }}>Nominate</button>
+                        <button
+                          onClick={() => createList(movie)}
+                          disabled={nomList.some(x => x.imdbID === movie.imdbID)}
+                        >Nominate</button>
                       </div>
                     </Item.Content>
                   </Item>
@@ -74,7 +73,7 @@ const FetchOMDB = () => {
           </Grid.Column>
           <Grid.Column width={1}></Grid.Column>
           <Grid.Column width={7} className="search-results">
-            <NomList movies={movies}></NomList> 
+            <NomList nomList={nomList} setnomList={setnomList}></NomList> 
           </Grid.Column>
         </Grid.Row>
       </Grid>

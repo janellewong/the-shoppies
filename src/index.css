@@ -39,12 +39,23 @@
     padding: 30px;
     background-color:ivory;
     border-radius: 25px;
-    min-height: 55vh;
+    min-height: 46vh;
 
   }
 
   .nominate-button {
     padding:15px;
+  }
+
+  .nominate-button button:enabled {
+    background-color: #ecf0f1;
+    border-radius: 8px;
+  }
+
+  .nominate-button button:disabled {
+    background-color: grey;
+    border-radius: 8px;
+    color: grey;
   }
 
   .footer {

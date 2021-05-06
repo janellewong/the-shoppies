@@ -1,29 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 
-//you can pass FUNCTIONS AS PROPS
-const NomList = ({movies, imdbID}) => {
-    const [nomList, setnomList] = useState([]);
-    
-    const handleClick = (movieID) => {
-        createList(movieID);
-    }
-    
-    const createList = (movieID) => {
-        setnomList(
-            nomList.map(nom => {
-                if (nom.imdbID === movieID) {
-                    const nom = movies.movie;
-                    return {...nom,  complete: !nom.complete};
-                } else {
-                    return nom;
-                }
-            })
-        );
-    };
+const NomList = ({nomList, setnomList}) => {
     
     const handleDelete = (imdbID) => {
         //THIS DOESN'T SAVE WHEN YOU REFRESH
-        const newMovieList = nomList.filter(nom => nom.imdbI !== imdbID);
+        const newMovieList = nomList.filter(nom => nom.imdbID !== imdbID);
         setnomList(newMovieList);
     }
 
@@ -31,7 +12,7 @@ const NomList = ({movies, imdbID}) => {
         <div className="nom-list">
             <h2>Nominated Movies:</h2>
             {nomList.map(nom => (
-                <div className="movies" key={nom.id} >
+                <div className="movies" key={nom.imdbID} >
                     <h2>{ nom.Title }</h2>
                     <button onClick ={() => handleDelete(nom.imdbID)}>Delete Movie</button>
                 </div>
