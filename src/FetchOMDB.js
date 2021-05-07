@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Image, Item, Input, Icon, Grid, Segment } from 'semantic-ui-react'
+import { Item, Input, Icon, Grid } from 'semantic-ui-react'
 import NomList from "./NomList";
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 const FetchOMDB = () => {
   const [loading, setLoading] = useState(false);
@@ -22,6 +24,24 @@ const FetchOMDB = () => {
     setnomList([...nomList, movie])
   };
 
+  const bannerPop = () => {
+    if (nomList.length >= 4) {
+      
+        store.addNotification({
+            title: "Congratulations!",
+            message: "You have nominated 5 movies for the Shoppies!",
+            type: "success",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true
+            }
+        });
+    }
+}
 
   useEffect(() => {
     fetchData()
@@ -49,27 +69,29 @@ const FetchOMDB = () => {
       <Grid columns={3}>
         <Grid.Row>
           <Grid.Column width={8} className="search-results">
-            <h4>Search Results:</h4>
-            <Item.Group>
-            {!movies ? (
-              <div>Sorry, there are no search results for " {searchQuery} "</div>
-            ) : movies.map(movie => (
-                  <Item>
-                    <Item.Image size='tiny' src={movie.Poster} />
-                    <Item.Content>
-                      <Item.Header as='a'>{movie.Title}</Item.Header>
-                      <Item.Meta>Year released: {movie.Year}</Item.Meta>
-                      <Item.Extra>Movie Type: {movie.Type}</Item.Extra>
-                      <div className = "nominate-button">
-                        <button
-                          onClick={() => createList(movie)}
-                          disabled={nomList.some(x => x.imdbID === movie.imdbID)}
-                        >Nominate</button>
-                      </div>
-                    </Item.Content>
-                  </Item>
-            ))}
-            </Item.Group>
+            <div className="search-space">
+              <h2>Search Results:</h2>
+              <Item.Group>
+              {!movies ? (
+                <div>Sorry, there are no search results for " {searchQuery} "</div>
+              ) : movies.map(movie => (
+                    <Item>
+                      <Item.Image size='tiny' src={movie.Poster} />
+                      <Item.Content>
+                        <Item.Header as='a'>{movie.Title}</Item.Header>
+                        <Item.Meta>Year released: {movie.Year}</Item.Meta>
+                        <Item.Extra>Movie Type: {movie.Type}</Item.Extra>
+                        <div className = "nominate-button">
+                          <button
+                            onClick={() => {createList(movie); bannerPop();}}
+                            disabled={nomList.some(x => x.imdbID === movie.imdbID || nomList.length >= 5)}
+                          >Nominate</button>
+                        </div>
+                      </Item.Content>
+                    </Item>
+              ))}
+              </Item.Group>
+            </div>
           </Grid.Column>
           <Grid.Column width={1}></Grid.Column>
           <Grid.Column width={7} className="search-results">

@@ -40,7 +40,14 @@
     background-color:ivory;
     border-radius: 25px;
     min-height: 46vh;
+  }
 
+  .search-space {
+    padding: 20px;
+  }
+
+  .nomlist-space {
+    padding: 20px;
   }
 
   .nominate-button {
