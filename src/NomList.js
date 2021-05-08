@@ -5,11 +5,18 @@ import { Item } from 'semantic-ui-react'
 
 const NomList = ({nomList, setnomList}) => {
 
-    const handleDelete = (imdbID) => {
-        //THIS DOESN'T SAVE WHEN YOU REFRESH
-        const newMovieList = nomList.filter(nom => nom.imdbID !== imdbID);
-        setnomList(newMovieList);
+    const handleDelete = (id) => {
+        // only locally (doesn't save)
+        // const newMovieList = nomList.filter(nom => nom.id !== id);
+        // setnomList(newMovieList);
+
+        fetch('http://localhost:8000/movies/'+ id, {
+            method: 'DELETE'
+        })
+       
     }
+
+    
 
     return ( 
         <div className="nom-list">
@@ -24,7 +31,7 @@ const NomList = ({nomList, setnomList}) => {
                             <Item.Meta>Year released: {nom.Year}</Item.Meta>
                             <Item.Extra>Movie Type: {nom.Type}</Item.Extra>
                             <div className = "nominate-button">
-                                <button onClick ={() => handleDelete(nom.imdbID)}>Delete Movie</button>
+                                <button onClick ={() => handleDelete(nom.id)}>Delete Movie</button>
                             </div>
                         </Item.Content>
                     </Item>

@@ -3,6 +3,7 @@ import { Item, Input, Icon, Grid } from 'semantic-ui-react'
 import NomList from "./NomList";
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
+import { stringify } from "querystring";
 
 const FetchOMDB = () => {
   const [loading, setLoading] = useState(false);
@@ -20,8 +21,30 @@ const FetchOMDB = () => {
     setLoading(false)
   }
 
+  useEffect(() => { 
+    fetch('http://localhost:8000/movies')
+    .then(res => {
+        return res.json()
+    })
+    .then((data) => {
+        console.log(data);
+        setnomList(data);
+    });
+  }, [nomList]); //fetches data when you refresh page (empty dependency list) and when nomList changes
+
   const createList = (movie) => {
-    setnomList([...nomList, movie])
+    setnomList([...nomList, movie]);
+
+    //saves movie to json data
+    fetch('http://localhost:8000/movies', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(movie) //changes movie into json data
+    }).then(() => {
+      console.log(movie);
+      
+    })
+
   };
 
   const bannerPop = () => {
@@ -95,7 +118,7 @@ const FetchOMDB = () => {
           </Grid.Column>
           <Grid.Column width={1}></Grid.Column>
           <Grid.Column width={7} className="search-results">
-            <NomList nomList={nomList} setnomList={setnomList}></NomList> 
+            {nomList && <NomList nomList={nomList} setnomList={setnomList}></NomList>}
           </Grid.Column>
         </Grid.Row>
       </Grid>
