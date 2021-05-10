@@ -3,7 +3,7 @@ import { Item, Input, Icon, Grid } from 'semantic-ui-react'
 import NomList from "./NomList";
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
-import { stringify } from "querystring";
+
 
 const FetchOMDB = () => {
   const [loading, setLoading] = useState(false);
