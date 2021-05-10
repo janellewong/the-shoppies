@@ -68,7 +68,7 @@ const FetchOMDB = () => {
 
   useEffect(() => {
     fetchData()
-  }, [searchQuery, fetchData])
+  }, [searchQuery])
 
   return (
     <div>
