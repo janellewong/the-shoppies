@@ -36,9 +36,10 @@ const FetchOMDB = () => {
 
   const createList = (movie) => {
     const updatedMovies = [...nomList, movie]
-    setnomList(JSON.stringify(updatedMovies));
+    console.log(updatedMovies, JSON.stringify(updatedMovies))
+    setnomList(updatedMovies);
 
-    localStorage.setItem('movies', updatedMovies)
+    localStorage.setItem('movies', JSON.stringify(updatedMovies))
     //saves movie to json data
     // fetch('http://localhost:8000/movies', {
     //   method: 'POST',
