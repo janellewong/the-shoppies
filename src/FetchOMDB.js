@@ -71,6 +71,10 @@ const FetchOMDB = () => {
     }
 }
 
+  useEffect(() => {
+    fetchData()
+  }, [searchQuery])
+
   return (
     <div>
       <div className="search-bar">
@@ -80,7 +84,6 @@ const FetchOMDB = () => {
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value)
-            fetchData()
           }} />
           
 
