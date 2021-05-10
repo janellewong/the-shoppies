@@ -1,5 +1,7 @@
 # The Shoppies 
 
+Try it out! https://theshoppiesss.netlify.app/
+
 ## Description
 
 **What will the application do?**
