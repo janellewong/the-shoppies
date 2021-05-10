@@ -5,9 +5,9 @@ import { Item } from 'semantic-ui-react'
 
 const NomList = ({nomList, setnomList}) => {
 
-    const handleDelete = (id) => {
+    const handleDelete = (imdbID) => {
         // only locally (doesn't save)
-        const newMovieList = nomList.filter(nom => nom.id !== id);
+        const newMovieList = nomList.filter(nom => nom.imdbID !== imdbID);
         localStorage.setItem('movies', JSON.stringify(newMovieList))
         setnomList(newMovieList);
 
@@ -32,7 +32,7 @@ const NomList = ({nomList, setnomList}) => {
                             <Item.Meta>Year released: {nom.Year}</Item.Meta>
                             <Item.Extra>Movie Type: {nom.Type}</Item.Extra>
                             <div className = "nominate-button">
-                                <button onClick ={() => handleDelete(nom.id)}>Delete Movie</button>
+                                <button onClick ={() => handleDelete(nom.imdbID)}>Delete Movie</button>
                             </div>
                         </Item.Content>
                     </Item>
