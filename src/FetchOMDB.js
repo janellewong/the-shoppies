@@ -14,36 +14,41 @@ const FetchOMDB = () => {
 
   const fetchData = async () => {
     setLoading(true)
-    const url = `http://www.omdbapi.com/?apikey=f2bfaa0c&type=movie&s=${searchQuery}`;
+    const url = `https://www.omdbapi.com/?apikey=f2bfaa0c&type=movie&s=${searchQuery}`;
     const response = await fetch(url);
     const data = await response.json();
     setMovies(data.Search)
     setLoading(false)
   }
 
-  useEffect(() => { 
-    fetch('http://localhost:8000/movies')
-    .then(res => {
-        return res.json()
-    })
-    .then((data) => {
-        console.log(data);
-        setnomList(data);
-    });
+  useEffect(() => {
+    const movies = JSON.parse(localStorage.getItem('movies') || '[]')
+    console.log(movies)
+    setnomList(movies)
+    // fetch('http://localhost:8000/movies')
+    // .then(res => {
+    //     return res.json()
+    // })
+    // .then((data) => {
+    //     console.log(data);
+    //     setnomList(data);
+    // });
   }, [nomList]); //fetches data when you refresh page (empty dependency list) and when nomList changes
 
   const createList = (movie) => {
-    setnomList([...nomList, movie]);
+    const updatedMovies = [...nomList, movie]
+    setnomList(updatedMovies);
 
+    localStorage.setItem('movies', updatedMovies)
     //saves movie to json data
-    fetch('http://localhost:8000/movies', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(movie) //changes movie into json data
-    }).then(() => {
-      console.log(movie);
+    // fetch('http://localhost:8000/movies', {
+    //   method: 'POST',
+    //   headers: {'Content-Type': 'application/json'},
+    //   body: JSON.stringify(movie) //changes movie into json data
+    // }).then(() => {
+    //   console.log(movie);
       
-    })
+    // })
 
   };
 
@@ -66,10 +71,6 @@ const FetchOMDB = () => {
     }
 }
 
-  useEffect(() => {
-    fetchData()
-  }, [searchQuery])
-
   return (
     <div>
       <div className="search-bar">
@@ -79,6 +80,7 @@ const FetchOMDB = () => {
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value)
+            fetchData()
           }} />
           
 
