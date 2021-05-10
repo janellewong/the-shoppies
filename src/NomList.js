@@ -9,7 +9,7 @@ const NomList = ({nomList, setnomList}) => {
         // only locally (doesn't save)
         const newMovieList = nomList.filter(nom => nom.id !== id);
         localStorage.setItem('movies', newMovieList)
-        setnomList(newMovieList);
+        setnomList(JSON.stringify(newMovieList));
 
         // fetch('http://localhost:8000/movies/'+ id, {
         //     method: 'DELETE'

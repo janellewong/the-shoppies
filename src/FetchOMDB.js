@@ -23,7 +23,6 @@ const FetchOMDB = () => {
 
   useEffect(() => {
     const movies = JSON.parse(localStorage.getItem('movies') || '[]')
-    console.log(movies)
     setnomList(movies)
     // fetch('http://localhost:8000/movies')
     // .then(res => {
@@ -33,11 +32,11 @@ const FetchOMDB = () => {
     //     console.log(data);
     //     setnomList(data);
     // });
-  }, [nomList]); //fetches data when you refresh page (empty dependency list) and when nomList changes
+  }, []); //fetches data when you refresh page (empty dependency list) and when nomList changes
 
   const createList = (movie) => {
     const updatedMovies = [...nomList, movie]
-    setnomList(updatedMovies);
+    setnomList(JSON.stringify(updatedMovies));
 
     localStorage.setItem('movies', updatedMovies)
     //saves movie to json data
